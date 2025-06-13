@@ -1130,7 +1130,7 @@ public class AgendamentoController : ControllerBase
             }
             else
             {
-                return BadRequest("Operação permitida somente para agendamentos com presença confirmada!");                      
+                return BadRequest("Operação permitida somente para agendamentos que NÃO tiveram confirmação de dados!");                      
             }
                 
         }
