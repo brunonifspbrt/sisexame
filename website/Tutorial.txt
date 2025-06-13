@@ -1,0 +1,100 @@
+Comandos:
+1- Criação projeto:
+npx create-next-app@latest
+ou npx create-next-app@15.2.4
+
+2- Em globals.css deixe somente a linha abaixo:
+@import "tailwindcss";
+
+3- Instale FlowBite React:
+npx flowbite-react@latest init
+
+4- Instale React Icons:
+npm install react-icons --save
+
+5- Instale Yup:
+npm i yup
+
+6- Instale React hook forms:
+npm i react-hook-form
+
+7- Instale extensão Yup para react hook form:
+npm i @hookform/resolvers yup
+
+8- Instale React Toastify (para notificações no sistema):
+npm i react-toastify --save
+
+9- Instalar Auth.js
+npm install next-auth@beta
+
+10- Config para usar comando no Powershell:
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
+
+
+--
+
+
+---- React hook forms e Yup: Configuração ----
+1- Na página onde tiver formulário que usará React hook forms e Yup (Exemplo: page.js) adicionar os códigos abaixo:
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+
+2- Crie o arquivo de schema do Yup para ser usado no Hook Form. Assim será feita a validação do formulário:
+a) o arquivo pode ser schema.js
+
+
+---- React Toastify: Configuração ----
+1- Para evitar incluir o componente ToastContainer antes de cada componente, adicione-o no arquivo de layout padrão do site.
+Ex: no arquivo Layout do sistema (app/(sistema)/layout.js) deixe assim o código:
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+export default function Layout({ children }) {
+    return (
+        <>
+            <ToastContainer position="top-right" autoClose={3000} className="text-sm" theme="colored" />
+            {children}
+        </>
+    )
+}
+
+2- Após adicionar no layout, ao adicionar o Toast em page.js (ou outra página), é necessário renderizar a página NO CLIENTE
+Ex:
+'use client'
+
+import { toast } from "react-toastify"
+
+export default function Home() {
+
+    return (
+        <>
+            <p>Página padrão</p>
+
+            <button onClick={() => {
+                toast.success("Mensagem de sucesso aqui");
+            }}>Exemplo de sucesso</button>
+
+            <button onClick={() => {
+                toast.error("Mensagem de erro aqui");
+            }}>Exemplo de erro</button>
+        </>
+    )
+}
+
+
+
+
+// ----- Ao configurar a URL do Next pra enviar na API:
+Se você estiver rodando ambos os serviços em containers, lembre-se de usar os nomes de serviço definidos no docker-compose.yml como hosts, ex:
+
+services:
+  frontend:
+    build: ./next
+    ports:
+      - "3000:3000"
+  backend:
+    build: ./api
+    ports:
+      - "5000:80"
+Aí, na chamada de API, use http://backend:80 no Next.js, e http://frontend:3000 na API, conforme necessário.

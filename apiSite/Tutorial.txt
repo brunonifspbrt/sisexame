@@ -1,0 +1,143 @@
+1- Criação de novo projeto:
+dotnet new webapi -n CRUDDemo 
+dotnet new webapi --use-controllers -o apiExemplo -f net8.0
+
+
+2- Instalar os pacotes necessários para Entity Framework Core (EF Core) no projeto:
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore –v 8.0.2
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+
+3- Instalar o EFCore globalmente (Caso precise):
+dotnet tool install dotnet-ef --global
+dotnet tool uninstall --global dotnet-ef
+
+ou local:
+dotnet tool install dotnet-ef --local
+
+
+
+Obs: o comando acima permite usar o EF em qualquer projeto sem necessidade de instalar os comandos do item 2
+
+4- Criando o model (modelo de uma tabela do BD):
+a) Crie pasta Models
+b) Crie arquivo .cs da model. Ex: Employee.cs
+
+5- Crie o DBContext (mediador entre BD e código):
+a) Crie pasta Data
+b) Crie arquivo .cs do context. Ex: AppDbContext.cs
+c) Não esquecer de criar o construtor do context
+
+6- Use o DBSet para criar a tabela no BD a partir do model no projeto:
+a) Arquivo .cs do context. Ex: AppDbContext.cs
+b) Após a função do construtor do context colocar código do DbSet para criar a tabela. Abaixo como fazer:
+ // DbSet cria a tabela no BD a partir do código do model definido no projeto
+ // Employees é o nome da tabela no BD
+ public DbSet<Employee> Employees {get; set;}
+
+7- Configurar, no projeto, a string de conexão que será informado no arquivo context
+a) Abrir appsettings.json
+b) Após "AllowedHosts" adicionar nova linha ConnectionStrings com dados conexão no SQL Server. Veja exemplo abaixo:
+ "AllowedHosts": "*",
+  "ConnectionStrings": {
+        "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=BDAPI3;User Id=sa;Password=aluno;MultipleActiveResultSets=true;TrustServerCertificate=True;"
+  }
+c) Acima a string de conexão menciona a instância (SQLExpress), o banco de dados, usuário e senha e NÃO verifica certificado (TrustServerCertificate=True)
+
+8- Incluir DBContext no carregamento do projeto
+a) Abre arquivo Program.cs do projeto
+b) Incluir no começo do código o namespace onde o contexto está, se necessário. Ex: using WebAPI3.Data;
+c) Adicionar o dbcontext aos serviços do projeto ao iniciar com a string de conexão (no caso DefaultConnection). Pode-se colocar antes de: var app = builder.Build();. Ex abaixo:
+// Adiciona o DbContext com a string de conexão
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+var app = builder.Build();
+Obs: o item c realiza a injeção de dependência no serviço do projeto.
+Isso significa que qualquer classe (como as dos controladores) que faça menção de AppDbContext
+irá carregar as informações declaradas no item c.
+O .Net realiza automaticamente a "vinculação" das informações em qualquer classe que AppDbContext (ou qualquer outro nome dado) 
+seja informado
+
+9- Criando a tabela no BD através do model existente no projeto:
+a) Criando primeira migração (arquivo de metadata da tabela no projeto):
+dotnet ef migrations add NomeMigracao
+
+b) A migração foi criada na pasta migrations
+- Verifique que há um arquivo com o nome da migração. Ex: 20250320135052_Inicial.cs
+- Nesse arquivo há o metadata de como será criado a tabela no SQL Server
+
+c) Aplique a migração no BD (arquivo de metadata da tabela será criado no BD):
+dotnet ef database update
+- O comando acima irá criar o banco de dados e as tabelas existentes na migração a partir dos models criados
+
+d) Caso queira REMOVER migração automático:
+ - dotnet ef migrations remove (remove a última migração)
+
+e) Caso queira REMOVER migração manualmente:
+ - Em Migrations remova TODOS os arquivos: .cs e .Designer.cs  (incluindo o contexto snapshot. Ex: AppDbContextModelSnapshot.cs)
+ - Aplique comando para atualizar estrutura do BD: dotnet ef database update
+ - remova o banco de dados para ser criado novamente: dotnet ef database drop --force
+ - Siga passo 9 em diante para criar BD e tabela novamente
+
+f) rever o BD para estado inicial:
+dotnet ef database update 0
+
+10- Criando as rotas (controllers) 
+a) Crie a pasta Controllers
+b) Adicione as rotas com os verbos http. Lembre-se de que é necessário informar o AppDbContext criado
+c) em Program.cs habilita mapeamento de rota para controller (antes de app.run):
+// Mapeando os controllers para o roteamento
+// permite que o ASP.NET Core mapeie as rotas definidas 
+// nos controladores para as requisições HTTP.
+app.MapControllers();
+
+
+11- Adicione o Swagger no projeto:
+a) Comando: 
+dotnet add package Swashbuckle.AspNetCore
+//dotnet add package Microsoft.OpenApi (requer using Microsoft.OpenApi.Models; em programs.cs)
+
+b) Adicione o Swagger (depois de builder.build) em Programs.cs:
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        // Defina o Swagger UI para ser acessível no caminho '/swagger'
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minha API v1");
+        // faz com que pelo caminho http://localhost:Porta/ o swagger seja aberto
+        c.RoutePrefix = string.Empty;  // A URL raiz servirá o Swagger UI
+    });
+}
+
+
+https://dev.to/rasheedmozaffar/web-apis-crud-with-net-and-ef-core-52dp
+
+12- Download imagem do Docker Linux com SQL Express 2022:
+a) Abra Docker Desktop na máquina
+b) no cmd, aplique o comando: docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+13- Criar container Linux com SQL Express 2022 a partir da imagem:
+docker run --name Banco -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Senh@123" -e "MSSQL_PID=Express" -p 1433:1433 -v data:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2022-latest
+
+14- Linha de conexão para API usando container Linux com SQL Exp 2k2:
+"Development": "Server=localhost,1433; Database=BDMed; User=sa;Password=Senh@123;TrustServerCertificate=True;"
+
+// ----- Controle de E-mail
+1- Instalar MailJet.Client:
+dotnet add package MailKit
+
+2- Com Gmail/SMTP:
+- Ativar Aut. 2 Etapas
+- Gerar senha para SMTP pelo link https://myaccount.google.com/apppasswords:
+- Salvar nome da chave e senha da chave:
+sisexame/tourirjarfxksklm 
+
+
+

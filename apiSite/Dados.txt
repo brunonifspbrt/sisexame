@@ -1,0 +1,169 @@
+SET IDENTITY_INSERT [dbo].[Exames] ON 
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (1, N'Exame 2.2', N'Descrição Exame 2..2', 20, N'Instrução TA', 0)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (2, N'Exame 2.3.1', N'Descrição do exame 2.3 é a desx', 27, N'Instruções do exame 2.3 é TB', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (3, N'Teste de exame novo', N'CCdescrição de exame novo', 18, N'AAinstruçção de exame novo TC', 0)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (14, N'Hemograma Completo', N'Exame de sangue que avalia componentes do sangue', 15, N'Jejum de 8 horas antes do exame', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (15, N'Raio-X de Tórax', N'Imagem do tórax para avaliação pulmonar', 10, N'Retirar objetos metálicos do corpo antes do exame', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (16, N'Ultrassonografia Abdominal', N'Avaliação de órgãos abdominais por ultrassom', 30, N'Jejum de 6 horas antes do exame', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (17, N'Teste de Glicose', N'Avaliação dos níveis de açúcar no sangue', 15, N'Jejum de 8 horas antes do exame', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (18, N'Colesterol Total', N'Medida do colesterol total no sangue', 15, N'Jejum de 12 horas antes do exame', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (19, N'Exame de Urina Tipo 1', N'Análise da urina para detectar infecções ou problemas', 15, N'Coletar amostra de urina pela manhã', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (20, N'Eletrocardiograma', N'Registro da atividade elétrica do coração', 10, N'Não há preparo especial', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (21, N'Teste de Esforço', N'Avaliação da performance cardíaca durante esforço físico', 45, N'Jejum de 4 horas e evitar cafeína', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (22, N'Densitometria Óssea', N'Avaliação da densidade mineral óssea', 20, N'Retirar joias e objetos metálicos', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (23, N'Tomografia Computadorizada de Cabeça', N'Imagem detalhada do cérebro', 20, N'Jejum de 4 horas e evitar certos medicamentos', 1)
+GO
+SET IDENTITY_INSERT [dbo].[Exames] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Pacientes] ON 
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (1, N'21212121211', N'Paciente 1.1', N'pac_11@uol.com.br', CAST(N'1970-09-02T03:00:00.0000000' AS DateTime2), 0, N'')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (2, N'32131313214', N'Paciente 1.2 Carlos', N'carlos1.2@globo.com', CAST(N'1972-07-16T03:00:00.0000000' AS DateTime2), 0, N'')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (3, N'49494918238', N'Paciente 1.3 Jonathan', N'jonathan13pac@bol.com.br', CAST(N'1981-08-15T03:00:00.0000000' AS DateTime2), 1, N'Observação de Jonathan')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (4, N'12345678901', N'Maria Silva', N'maria.silva@email.com', CAST(N'1985-04-12T00:00:00.0000000' AS DateTime2), 1, N'Paciente com histórico de alergia a penicilina')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (5, N'98765432100', N'João Pereira', N'joao.pereira@email.com', CAST(N'1990-09-23T00:00:00.0000000' AS DateTime2), 1, N'Necessita de acompanhamento psicológico')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (6, N'45678912345', N'Ana Costa', N'ana.costa@email.com', CAST(N'1978-12-05T00:00:00.0000000' AS DateTime2), 0, N'Paciente inativa no sistema')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (7, N'32165498700', N'Carlos Lima', N'carlos.lima@email.com', CAST(N'1965-07-19T00:00:00.0000000' AS DateTime2), 1, N'Alergia a medicamentos')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (8, N'65498732109', N'Fernanda Souza', N'fernanda.souza@email.com', CAST(N'1982-03-30T00:00:00.0000000' AS DateTime2), 1, N'Paciente com hipertensão')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (9, N'78912345678', N'Lucas Oliveira', N'lucas.oliveira@email.com', CAST(N'1995-11-11T00:00:00.0000000' AS DateTime2), 1, NULL)
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (10, N'14725836900', N'Patrícia Almeida', N'patricia.almeida@email.com', CAST(N'1970-06-25T00:00:00.0000000' AS DateTime2), 0, N'Paciente aposentada')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (11, N'96385274100', N'Rafael Santos', N'rafael.santos@email.com', CAST(N'1988-02-14T00:00:00.0000000' AS DateTime2), 1, N'Necessita de acompanhamento de fisioterapia')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (12, N'25814736900', N'Luana Martins', N'luana.martins@email.com', CAST(N'1992-08-08T00:00:00.0000000' AS DateTime2), 1, N'Paciente gestante')
+GO
+SET IDENTITY_INSERT [dbo].[Pacientes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Usuarios] ON 
+GO
+INSERT [dbo].[Usuarios] ([Id], [Nome], [Email], [Foto], [DtNasc], [Senha], [SenhaTemp], [Tipo], [Ativo], [DtUltAcesso], [EmailTemp], [CodigoVerEmail], [DtUltTrocaEmail], [CodigoVerSenha], [DtUltTrocaSenha], [Operacao]) VALUES (2, N'Usssu2', N'us2@example.com', NULL, CAST(N'2025-03-30T01:39:05.7610000' AS DateTime2), N'6990eec60b6a01dacf34e0ef735a546bec04ce189c3ade6ffc66c117b49a7e3bb05e1398f671d140efa6ef0d0c54982b47494b4425ba967e1d1c77d0c165a198', NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Usuarios] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Agendamentos] ON 
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (16, 22, 6, CAST(N'2025-04-25T17:08:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (17, 15, 7, CAST(N'2025-04-25T17:15:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (18, 21, 9, CAST(N'2025-04-25T17:08:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (19, 16, 4, CAST(N'2025-04-26T08:00:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (20, 20, 6, CAST(N'2025-04-27T08:51:00.0000000' AS DateTime2), 2, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (21, 23, 7, CAST(N'2025-04-26T11:51:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (22, 18, 8, CAST(N'2025-05-12T08:10:00.0000000' AS DateTime2), 2, CAST(N'2025-05-12T08:03:00.0000000' AS DateTime2), NULL, NULL, NULL, 1, CAST(N'2025-05-13T17:01:12.0000000' AS DateTime2), 1, CAST(N'2025-05-14T17:49:12.0000000' AS DateTime2), NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (23, 14, 5, CAST(N'2025-04-27T12:51:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (24, 19, 4, CAST(N'2025-04-26T12:34:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (25, 22, 10, CAST(N'2025-04-30T14:51:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (26, 18, 11, CAST(N'2025-04-26T13:52:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (27, 21, 12, CAST(N'2025-04-29T11:44:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (28, 18, 6, CAST(N'2025-04-27T17:38:00.0000000' AS DateTime2), 2, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (29, 19, 6, CAST(N'2025-04-27T17:39:00.0000000' AS DateTime2), 2, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (30, 22, 8, CAST(N'2025-04-27T17:40:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (31, 15, 6, CAST(N'2025-04-27T17:42:00.0000000' AS DateTime2), 2, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (32, 16, 6, CAST(N'2025-04-27T17:50:00.0000000' AS DateTime2), 2, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia]) VALUES (33, 17, 6, CAST(N'2025-04-27T17:52:00.0000000' AS DateTime2), 2, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Agendamentos] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Parametros] ON 
+GO
+INSERT [dbo].[Parametros] ([Id], [AtrasoMaximo]) VALUES (1, 10)
+GO
+SET IDENTITY_INSERT [dbo].[Parametros] OFF
+GO
+
+
+-------- dados usados em container
+SET IDENTITY_INSERT [dbo].[Exames] ON 
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (1, N'Hemograma Completo', N'Exame de sangue que avalia componentes do sangue', 12, N'Jejum de 8 horas antes do exame', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (3, N'Teste de Glicose', N'Avaliação dos níveis de açúcar no sangue', 15, N'Jejum de 8 horas antes do exame normal', 1)
+GO
+INSERT [dbo].[Exames] ([Id], [Nome], [Descricao], [Duracao], [Instrucoes], [Ativo]) VALUES (4, N'Colesterol Total', N'Medida do colesterol total no sangue', 15, N'Jejum de 12 horas antes do exame', 1)
+GO
+SET IDENTITY_INSERT [dbo].[Exames] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Pacientes] ON 
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (1, N'15875143037', N'Maria Silva Pires', N'sifivo8252@leabro.com', CAST(N'1991-05-16T00:00:00.0000000' AS DateTime2), 1, N'Paciente com histórico de alergia a cacau')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (2, N'55569623086', N'João Pereira Sales', N'sifivo8252@leabro.com', CAST(N'1995-04-12T00:00:00.0000000' AS DateTime2), 1, N'Necessita de acompanhamento psicológico sempre')
+GO
+INSERT [dbo].[Pacientes] ([Id], [CPF], [Nome], [Email], [DataNascimento], [Ativo], [Obs]) VALUES (3, N'92254729004', N'Carlos Lima', N'sifivo8252@leabro.com', CAST(N'1972-09-10T00:00:00.0000000' AS DateTime2), 1, N'Alergia a medicamentos')
+GO
+SET IDENTITY_INSERT [dbo].[Pacientes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Agendamentos] ON 
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia], [HorCancela], [HorLancto], [Confirmacao], [HorConfirmacao], [NumFila], [HorFila]) VALUES (3, 1, 3, CAST(N'2025-05-26T21:50:00.0000000' AS DateTime2), 1, CAST(N'2025-05-26T21:31:33.0000000' AS DateTime2), NULL, NULL, NULL, 0, NULL, 0, NULL, NULL, CAST(N'2025-05-26T21:33:25.0000000' AS DateTime2), CAST(N'2025-05-26T21:22:06.0000000' AS DateTime2), 0, NULL, 0, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia], [HorCancela], [HorLancto], [Confirmacao], [HorConfirmacao], [NumFila], [HorFila]) VALUES (4, 3, 2, CAST(N'2025-05-26T22:17:00.0000000' AS DateTime2), 4, CAST(N'2025-05-26T21:46:58.0000000' AS DateTime2), NULL, CAST(N'2025-05-26T21:48:00.0000000' AS DateTime2), N'Desistiu pra fazer outor dia', 1, CAST(N'2025-05-26T21:47:32.0000000' AS DateTime2), 0, NULL, NULL, NULL, CAST(N'2025-05-26T21:22:46.0000000' AS DateTime2), 0, NULL, 0, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia], [HorCancela], [HorLancto], [Confirmacao], [HorConfirmacao], [NumFila], [HorFila]) VALUES (5, 4, 1, CAST(N'2025-05-26T21:50:00.0000000' AS DateTime2), 1, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL, CAST(N'2025-05-26T21:30:39.0000000' AS DateTime2), CAST(N'2025-05-26T21:25:28.0000000' AS DateTime2), 0, NULL, 0, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia], [HorCancela], [HorLancto], [Confirmacao], [HorConfirmacao], [NumFila], [HorFila]) VALUES (6, 1, 1, CAST(N'2025-05-26T21:53:00.0000000' AS DateTime2), 5, CAST(N'2025-05-26T21:33:08.0000000' AS DateTime2), CAST(N'2025-05-26T21:46:06.0000000' AS DateTime2), NULL, NULL, 1, CAST(N'2025-05-26T21:43:19.0000000' AS DateTime2), 1, CAST(N'2025-05-26T21:45:16.0000000' AS DateTime2), NULL, NULL, CAST(N'2025-05-26T21:30:08.0000000' AS DateTime2), 0, NULL, 0, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia], [HorCancela], [HorLancto], [Confirmacao], [HorConfirmacao], [NumFila], [HorFila]) VALUES (7, 3, 3, CAST(N'2025-05-26T21:23:00.0000000' AS DateTime2), 3, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, CAST(N'2025-05-26T21:57:05.0000000' AS DateTime2), NULL, CAST(N'2025-05-26T21:50:23.0000000' AS DateTime2), 0, NULL, 0, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia], [HorCancela], [HorLancto], [Confirmacao], [HorConfirmacao], [NumFila], [HorFila]) VALUES (8, 1, 2, CAST(N'2025-05-27T12:51:00.0000000' AS DateTime2), 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL, NULL, CAST(N'2025-05-26T21:51:33.0000000' AS DateTime2), 0, NULL, 0, NULL)
+GO
+INSERT [dbo].[Agendamentos] ([Id], [ExameId], [PacienteId], [HorIni], [Status], [HorPresenca], [HorFim], [HorDes], [MotDes], [DadosOk], [HorDados], [Convocacao], [HorConvocacao], [HorAusencia], [HorCancela], [HorLancto], [Confirmacao], [HorConfirmacao], [NumFila], [HorFila]) VALUES (10, 4, 1, CAST(N'2025-05-26T23:18:00.0000000' AS DateTime2), 5, CAST(N'2025-05-26T23:17:23.0000000' AS DateTime2), CAST(N'2025-05-26T23:44:03.0000000' AS DateTime2), NULL, NULL, 1, CAST(N'2025-05-26T23:42:44.0000000' AS DateTime2), 1, CAST(N'2025-05-26T23:43:40.0000000' AS DateTime2), NULL, NULL, CAST(N'2025-05-26T23:16:06.0000000' AS DateTime2), 1, CAST(N'2025-05-26T23:42:25.0000000' AS DateTime2), 0, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Agendamentos] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Parametros] ON 
+GO
+INSERT [dbo].[Parametros] ([Id], [AtrasoMaximo]) VALUES (1, 16)
+GO
+SET IDENTITY_INSERT [dbo].[Parametros] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Sistemas] ON 
+GO
+INSERT [dbo].[Sistemas] ([Id], [DataInicializacao], [Inicializado]) VALUES (1, CAST(N'2025-05-26T16:44:46.0000000' AS DateTime2), 1)
+GO
+SET IDENTITY_INSERT [dbo].[Sistemas] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Usuarios] ON 
+GO
+INSERT [dbo].[Usuarios] ([Id], [Nome], [Email], [Foto], [DtNasc], [Senha], [SenhaTemp], [Tipo], [Ativo], [DtUltAcesso], [EmailTemp], [CodigoVerEmail], [DtUltTrocaEmail], [CodigoVerSenha], [DtUltTrocaSenha], [Operacao]) VALUES (1, N'Supervisor', N'aa@aa.com', NULL, CAST(N'2025-05-26T00:00:00.0000000' AS DateTime2), N'760818bf3db47a15357c54f290d56bc4e9284be839980416b59280f610ccb01ed03eee457cd07d7bad19c97c7e391df5ddf794fd89cbe7496a4080d7f4e28c0d', NULL, 0, 1, CAST(N'2025-05-26T21:11:32.0000000' AS DateTime2), NULL, NULL, CAST(N'2025-05-26T17:10:16.0000000' AS DateTime2), NULL, CAST(N'2025-05-26T17:12:42.0000000' AS DateTime2), 0)
+GO
+SET IDENTITY_INSERT [dbo].[Usuarios] OFF
+GO

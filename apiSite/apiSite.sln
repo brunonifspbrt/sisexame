@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "apiSite", "apiSite.csproj", "{52326EA7-A360-46A0-9013-46AD202E6FBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52326EA7-A360-46A0-9013-46AD202E6FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52326EA7-A360-46A0-9013-46AD202E6FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52326EA7-A360-46A0-9013-46AD202E6FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52326EA7-A360-46A0-9013-46AD202E6FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B2360B2-C2F2-4BF6-9207-1F8027754CB1}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,210 @@
+Atenção: Em Atendimento.js -> page.js -> remover componente ConfirmaDados (linha 99)
+
+-- Uso do Docker
+
+-- API
+O item 1 cria a imagem da API com o conteudo da API criado
+
+1- Na raiz do arquivo .csproj crie um arquivo Dockerfile com conteúdo abaixo.
+Lembre-se de alterar o termo apiSite para o nome da sua api. No caso aqui: apiSite
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
+
+# Usar o root para instalar pacotes
+USER root
+
+# Instalar tzdata e configurar o fuso horário
+RUN apt-get update && apt-get install -y tzdata
+
+# Configurar o fuso horário para 'America/Sao_Paulo'
+ENV TZ=America/Sao_Paulo
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["apiSite.csproj", "."]
+RUN dotnet restore "./apiSite.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "./apiSite.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./apiSite.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "apiSite.dll"]
+
+2- No appsettings.json informe que o bd esta no container SGBD:
+"Development": "Server=sgbd; Database=NomeBase; User=sa; Password=Senh@123; TrustServerCertificate=True; Persist Security Info=True"
+
+3- Execute o comando abaixo na raiz do conteúdo da pasta API:
+docker build ./ -t api
+
+
+-- Next
+1- Crie arquivo .env.production com o conteudo do .env.local
+2- No .env.production adicione/atualize o conteudo com: 
+Obs: 5000 = exposta pelo container do site, 8080 = exposta pelo container da API
+API_URL=http://api:8080/api
+AUTH_URL=http://localhost:5000
+AUTH_TRUST_HOST=true
+3- SITE_URL deverá ter o conteudo de AUTH_URL
+4- Em next.config.js adicione o atributo output ficando assim:
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    output: "standalone"
+};
+
+export default nextConfig;
+5- Crie, na raiz do projeto do site, o arquivo Dockerfile
+6- No arquivo do item 5 adicione o conteudo abaixo:
+FROM node:18-alpine AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Install dependencies based on the preferred package manager
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# Next.js collects completely anonymous telemetry data about general usage.
+# Learn more here: https://nextjs.org/telemetry
+# Uncomment the following line in case you want to disable telemetry during the build.
+# ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN \
+  if [ -f yarn.lock ]; then yarn run build; \
+  elif [ -f package-lock.json ]; then npm run build; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+# Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+# Uncomment the following line in case you want to disable telemetry during runtime.
+# ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+
+# Set the correct permission for prerender cache
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT 3000
+
+# server.js is created by next build from the standalone output
+# https://nextjs.org/docs/pages/api-reference/next-config-js/output
+CMD HOSTNAME="0.0.0.0" node server.js
+
+7- Aplique o comando abaixo na raiz do projeto do site pra gerar a imagem:
+docker build ./ -t sitenext
+
+-- Containers:
+1- Crie arquivo docker-compose.yml em outra pasta avulsa para criar o container
+a partir das imagens com o conteudo a seguir.
+Obs: 
+- note que na API é necessário alterar a porta que vai para 8080 e 8081.
+- pra isso dê um dotnet watch pra ter noção. No caso altere 5294 para 5175
+
+services:
+  site:
+    image: sitenext
+    ports:
+      - "5000:3000"
+  api:
+    image: api
+    ports:
+      - "5175:8080"
+      - "7145:8081"
+  sgbd:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - SA_PASSWORD=Senh@123
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - type: volume
+        source: dbdata
+        target: /var/opt/mssql
+volumes:
+  dbdata:
+    driver: local
+
+
+2- Execute o comando na pasta onde está o arquivo docker-compose.yml:
+docker compose -p="sisexame" up -d
+
+3- Com o comando do item 2 foi criado: api, site e BD.
+Perceba que isso exige criar agora a base de dados no container SQL.
+Na pasta do projeto da API, altere o appsettings.json como abaixo:
+"Development": "Server=localhost,1433; Database=BDMed; User=sa; Password=Senh@123; TrustServerCertificate=True; Persist Security Info=True"
+
+4- Aplique a migração pra criar o bd no container SQL:
+dotnet ef database update
+
+
+
+
+-- Ajustes:
+1) Adicionar fuso horário no container da API pra ele trabalhar com hora certa
+- No dockerfile da api adicionar (já foi adicionado mas pra constar) o código abaixo:
+# Usar o root para instalar pacotes
+USER root
+
+# Instalar tzdata e configurar o fuso horário
+RUN apt-get update && apt-get install -y tzdata
+
+# Configurar o fuso horário para 'America/Sao_Paulo'
+ENV TZ=America/Sao_Paulo
+
+2) Pra reconstruir a imagem do dockerfile:
+docker build ./ -t api
+
+3- Reinicie container da api se precisar:
+docker run -d -p 8080:8080 api
+
+Conteudo env.production (Next):
+API_URL=http://api:8080/api
+API_KEY=a7b9c8d2e4f6g8h1i3j5k7l9m1n3o5p7q9r1s3t5u7v9w1x3y5z7a9b1c3d5e7f9
+SITE_URL=http://localhost:5000
+AUTH_SECRET=7g4h2k9l3m8n1p0q5r6s7t8u9v0w1x2y3z4a5b
+AUTH_URL=http://localhost:5000
+AUTH_TRUST_HOST=true
