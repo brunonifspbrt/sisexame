@@ -35,9 +35,9 @@ const PainelDetalhe = ({ exame }) => {
   };
 
   const formataTempoMedio = (valTempo) => {
-    if (valTempo > 1) {
-      return valTempo.toFixed(2); // Formata com 2 casas decimais
-    }
+    // if (valTempo > 1) {
+    //   return valTempo.toFixed(2); // Formata com 2 casas decimais
+    // }
     return valTempo; // Retorna o valor original se for <= 1
   };
 
@@ -62,7 +62,7 @@ const PainelDetalhe = ({ exame }) => {
           <div className="text-center">
             <div className="text-2xl text-gray-800 dark:text-gray-300 flex items-center justify-center gap-2">
               <HiOutlineClock className="text-lg" />
-              Tempo Médio Atendimento:
+              Tempo Médio Atend. (Aprox):
             </div>
             <div className="text-3xl font-bold text-teal-600 dark:text-teal-400">
               {exame?.exameTempoMedio < 1

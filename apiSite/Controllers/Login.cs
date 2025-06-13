@@ -85,6 +85,12 @@ public class LoginController : ControllerBase
                 Console.WriteLine("Login - Login: E-mail informado não foi encontrado");
                 return BadRequest("E-mail e/ou senha inválido(s)");
             }
+
+            if (usuarioBD.Ativo == false)
+            {
+                Console.WriteLine("Login - Login: Usuário inativo sem acesso ao sistema");
+                return BadRequest("Acesso não permitido ao usuário informado");
+            }
                 
 
             // Console.WriteLine(CriaSenha("368abbc5aca52a49761deb4bc1607bfb275cfc8fcfdabe5bb40bec348f6177a9"));    

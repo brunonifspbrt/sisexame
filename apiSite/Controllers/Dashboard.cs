@@ -90,7 +90,8 @@ public class DashboardController : ControllerBase
             .Where(a => a.Status == 5 && a.HorIni.Value.Date == dataBD.Date) // Filtro agendamentos com HorIni igual à data do servidor
             .Select(a => new 
             {
-                TempoEspera = EF.Functions.DateDiffMinute(a.HorConvocacao, a.HorIni) // Calculo a diferença em minutos entre HorConvocacao e HorIni
+                // TempoEspera = EF.Functions.DateDiffMinute(a.HorConvocacao, a.HorIni) // Calculo a diferença em minutos entre HorConvocacao e HorIni
+                TempoEspera = EF.Functions.DateDiffMinute(a.HorIni,a.HorConvocacao) // Calculo a diferença em minutos entre HorConvocacao e HorIni
             })
             .AverageAsync(a => a.TempoEspera);  // Calcula a média dos tempos de espera
 

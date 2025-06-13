@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Estudo\\Projeto\\apiSite\\apiSite.csproj": {}
+    "D:\\Estudo\\Projeto\\Codigo\\apiSite\\apiSite.csproj": {}
   },
   "projects": {
-    "D:\\Estudo\\Projeto\\apiSite\\apiSite.csproj": {
+    "D:\\Estudo\\Projeto\\Codigo\\apiSite\\apiSite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Estudo\\Projeto\\apiSite\\apiSite.csproj",
+        "projectUniqueName": "D:\\Estudo\\Projeto\\Codigo\\apiSite\\apiSite.csproj",
         "projectName": "apiSite",
-        "projectPath": "D:\\Estudo\\Projeto\\apiSite\\apiSite.csproj",
+        "projectPath": "D:\\Estudo\\Projeto\\Codigo\\apiSite\\apiSite.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "D:\\Estudo\\Projeto\\apiSite\\obj\\",
+        "outputPath": "D:\\Estudo\\Projeto\\Codigo\\apiSite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",

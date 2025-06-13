@@ -66,7 +66,7 @@ export async function Atualizar(data) {
     body: JSON.stringify(data),
   };
 
-  console.log(args);
+  // console.log(args);
   const url = process.env.API_URL + "/usuario/alteramail";
 
   let retorno = {

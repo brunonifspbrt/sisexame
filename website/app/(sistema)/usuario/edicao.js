@@ -75,7 +75,7 @@ export default function Edicao({ id }) {
       ativo: data.ativo, // Valor padrão para o checkbox
     };
 
-    console.log(dados);
+    // console.log(dados);
 
     // aplico FormData pra enviar dados + imagem
     const formDados = new FormData();

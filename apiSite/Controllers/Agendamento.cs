@@ -1382,9 +1382,9 @@ public class AgendamentoController : ControllerBase
             var maiorNumFila = await context.Agendamentos
                 .Where(a => a.Status == 2 
                             && a.DadosOk 
-                            && a.Convocacao
                             && a.ExameId == codExame
-                            && a.HorIni.Value.Date == dtAgend.Date)            
+                            && a.HorIni.Value.Date == dtAgend.Date
+                            && a.HorFila.HasValue)            
                 .Select(a => (int?)a.NumFila) // Cast para int? para evitar erro se nenhum registro for encontrado e retorna null caso azio
                 .MaxAsync() ?? 0; // se nenhum registro for encontrado, retorna 0
 
@@ -1398,6 +1398,9 @@ public class AgendamentoController : ControllerBase
             {
                 novoValorFila = maiorNumFila + 1; // incrementa o último valor da fila
             }
+
+            // Console.WriteLine(maiorNumFila);
+            // Console.WriteLine(novoValorFila);
 
             if ( agendamentoBD.Status == 2 && agendamentoBD.DadosOk && agendamentoBD.Convocacao )   
             {

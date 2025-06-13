@@ -93,6 +93,22 @@ public class PainelDigitalController : ControllerBase
                         ? atendidos.Average(a => (a.HorFim.Value - a.HorConvocacao.Value).TotalMinutes)
                         : tempoPadrao;
 
+                    // tratando valor tempoMedio
+                    // Separando a parte inteira e a parte decimal
+                    int parteInteira = (int)tempoMedio;
+                    double parteDecimal = tempoMedio - parteInteira;
+
+                    // Arredondando valor conforme parte decimal
+                    if (parteDecimal >= 0.50)
+                    {
+                        tempoMedio = Math.Ceiling(tempoMedio); // Arredonda para cima
+                    }
+                    else
+                    {
+                        tempoMedio = Math.Floor(tempoMedio); // Arredonda para baixo
+                    }
+
+
                     // construo relação de pacientes na fila
                     // informando o tempo médio daquele tipo de exame
                     // var pacientesFila = g
